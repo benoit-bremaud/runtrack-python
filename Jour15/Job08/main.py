@@ -3,12 +3,14 @@ class Livre:
     - son titre
     - son auteur
     - le nombre de page
+    - sa disponibilité
     """
 
     def __init__(self, titre, auteur, nb_page):
         self.__titre = titre        # Attribut privé
         self.__auteur = auteur      # Attribut privé
         self.__nb_page = nb_page    # Attribut privé
+        self.__dispo = True    # Attribut privé + valeur par défaut
 
     def get_titre(self):
         return self.__titre
@@ -41,25 +43,65 @@ class Livre:
         else:
             print("Saisie incorrecte, veuillez saisir un nombre entier positif !")
 
+    def verification(self):
+        if self.__dispo:
+            return True
+        else:
+            return False
+
+    def emprunter(self):
+        if self.__dispo:
+            self.__dispo = False
+            print("Le livre est disponible !!")
+            return False
+        else:
+            print("Livre non disponible !!")
+
+    def rendre(self):
+        if self.__dispo:
+            print("Ce livre n'a pas été emprunté ici !!")
+        else:
+            self.__dispo = True
+            print("Le livre à bien été rendu !!")
+
 livre = Livre(titre="Mon livre", auteur="Benoit Bremaud", nb_page=250)
 titre = livre.get_titre()
 auteur = livre.get_auteur()
 page = livre.get_nb_page()
+dispo = livre.verification()
+
 print(f"Le titre du livre est : {titre}")
 print(f"Son auteur est : {auteur}")
 print(f"Il fait {page} pages")
+print(f"Il est : {dispo}")
 
 livre.set_titre("Mon deuxieme livre")
 livre.set_auteur("Aline Berniere")
-livre.set_nb_page(275)
+livre.set_nb_page(350)
 
 titre = livre.get_titre()
 auteur = livre.get_auteur()
 page = livre.get_nb_page()
+dispo = livre.verification()
+emprunter = livre.emprunter()
 
 print(f"Nouveau titre : {titre}")
 print(f"Nouvel Auteur : {auteur}")
-print(f"Nouveau nombre de page : {page}")
+print(f"Nouveau nombre de page : {page}\n")
+print(f"Disponibilité du livre : {dispo}")
+print("J'emprunte alors le livre !\n")
+print(f"Etat de la disponibilité après emprunt : {emprunter}")
+
+print("Je souhaite rendre le livre !")
+
+rendre = livre.rendre()
+dispo = livre.verification()
+
+print(f"Le livre à bien été rendu, car dispo = {dispo}")
+
+
+
+
 
 
 
