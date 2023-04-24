@@ -1,8 +1,8 @@
-#coding:utf-8
+# coding:utf-8
 
 import hashlib, maskpass
 
-#identifiant = input("Identifiant : ")
+# identifiant = input("Identifiant : ")
 
 special_char = "!@#$%^&*"
 test = 0
